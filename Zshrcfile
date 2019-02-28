@@ -1,0 +1,42 @@
+export ZSH=/Users/sid/.oh-my-zsh
+export TERM="xterm-256color"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_MODE="nerdfont-complete"
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon user dir_writable dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time root_indicator background_jobs time disk_usage ram)
+#POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+#POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+#POWERLEVEL9K_USER_ICON="\uF415" # 
+POWERLEVEL9K_ROOT_ICON="\uF09C"
+#POWERLEVEL9K_SUDO_ICON=$'\uF09C' # 
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
+#POWERLEVEL9K_VCS_GIT_ICON='\uF408 '
+#POWERLEVEL9K_VCS_GIT_GITHUB_ICON='\uF408 '
+#Set default user to avoid showing 'user' on every line
+DEFAULT_USER=”whoami”
+
+plugins=(
+  git
+  rails
+  ruby
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+export EDITOR='/usr/bin/vim'
+alias composer="php /usr/local/bin/composer.phar"
+alias dcu='docker-compose up'
+alias dcd='docker-compose down'
+alias drc='docker-compose run --rm app bundle exec rails c'
+alias dspec='docker-compose run --rm app bundle exec rspec'
+alias migrate='docker-compose run --rm app bundle exec rake db:migrate'
+alias ms='middleman s'
+alias mb='middleman b'
+alias ok='yarn install ; bundle; rails db:migrate'
+# start rails with https certifcate
+alias rcert= "rails s -b 'ssl://localhost:3000?key=localhost.key&cert=localhost.crt'"
